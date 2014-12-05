@@ -20,3 +20,8 @@ NSString *nameOfCurrentLocale = [BDVCountryNameAndCode countryNameForCurrentLoca
 ```
 
 Easy but convenient 
+
+TODO
+=====================
+Create plist for the country/prefix data 
+
