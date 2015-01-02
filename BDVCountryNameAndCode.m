@@ -322,11 +322,11 @@
     
     UIImage *image = [UIImage imageNamed:imageName];
     
-    if (imageName != nil) {
+    if (imageName) {
         return image;
     }
     
-    return nil;
+    return [UIImage new];
 }
 
 
