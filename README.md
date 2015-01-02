@@ -19,9 +19,15 @@ BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init
 NSString *nameOfCurrentLocale = [BDVCountryNameAndCode countryNameForCurrentLocale]; // Returns "Canada"
 ```
 
+Get the image flat of current locale of user:
+```objective-c
+BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init];
+UIImage *flag = [BDVCountryNameAndCode countryLocaleImage]; // Returns UIImage*
+```
+
 Easy but convenient 
 
 TODO
 =====================
-Create plist for the country/prefix data 
+Create a CocoaPods
 
