@@ -318,6 +318,8 @@
     
     NSString *imageName = [NSString stringWithFormat:@"%@.png",[[NSLocale currentLocale] displayNameForKey:NSLocaleCountryCode value:[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode]]];
     
+    imageName = [imageName stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    
     UIImage *image = [UIImage imageNamed:imageName];
     
     if (imageName != nil) {
