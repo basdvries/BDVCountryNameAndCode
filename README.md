@@ -23,5 +23,5 @@ Easy but convenient
 
 TODO
 =====================
-Create plist for the country/prefix data 
+Create a CocoaPods
 
