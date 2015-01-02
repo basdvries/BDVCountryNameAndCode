@@ -314,4 +314,18 @@
     return countryName;
 }
 
+-(UIImage *)countryLocaleImage{
+    
+    NSString *imageName = [NSString stringWithFormat:@"%@.png",[[NSLocale currentLocale] displayNameForKey:NSLocaleCountryCode value:[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode]]];
+    
+    UIImage *image = [UIImage imageNamed:imageName];
+    
+    if (imageName != nil) {
+        return image;
+    }
+    
+    return nil;
+}
+
+
 @end
