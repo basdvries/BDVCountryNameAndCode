@@ -10,10 +10,6 @@
 
 @interface BDVCountryNameAndCode : NSObject
 
-@property (nonatomic, copy) NSDictionary *dictDialingCodes;
-@property (nonatomic, copy) NSArray *countryNames;
-@property (nonatomic, copy) NSArray *prefixDialingCodes;
-
 -(NSString *)prefixForCurrentLocale;
 -(NSString *)countryNameForCurrentLocale;
 

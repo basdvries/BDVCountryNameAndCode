@@ -8,11 +8,19 @@
 
 #import "BDVCountryNameAndCode.h"
 
-@implementation BDVCountryNameAndCode
+
+@implementation BDVCountryNameAndCode{
+    NSArray *BDVCountryNameAndCodePlist;
+    NSMutableDictionary *dictDialingCodes;
+    NSMutableArray *countryNames;
+    NSMutableArray *prefixDialingCodes;
+}
 
 -(id)init{
     self = [super init];
     if(self){
+        /*
+        
         self.dictDialingCodes = [[NSDictionary alloc]initWithObjectsAndKeys:
                              @"+972", @"IL",
                              @"+93", @"AF",
@@ -268,22 +276,40 @@
         
             self.prefixDialingCodes = [[NSArray alloc] initWithObjects:@"+93",@"+335",@"+213",@"+1684",@"+376",@"+376",@"+244",@"+1264",@"+672",@"+1268",@"+54", @"+374",@"+297", @"+61",@"+43", @"+994",@"+1242",@"+973",@"+880",@"+1246"@"+375",@"+32",@"+501",@"+229",@"+1441",@"+975",@"+591",@"+387",@"+267"@"+55",@"+1284",@"+673",@"+359",@"+226",@"+95",@"+257",@"+855",@"+237",@"+1",@"+238",@"+1345",@"+236",@"+235",@"+56",@"+86",@"+61",@"+61",@"+57",@"+269",@"+682",@"+506",@"+385",@"+53",@"+357",@"+420",@"+243",@"+45",@"+253",@"+1767",@"+1809",@"+593",@"+20",@"+503",@"+240",@"+291",@"+372",@"+251",@"+500",@"+298",@"+679",@"+358",@"+33",@"+689",@"+241",@"+220",@"+970",@"+995",@"+49",@"+233",@"+350",@"+30",@"+299",@"+1473",@"+1671",@"+502",@"+224",@"+245",@"+592",@"+509",@"+39",@"+504",@"+852",@"+36",@"+354",@"+91",@"+62",@"+98",@"+964",@"+353",@"+44",@"+972",@"+39",@"+225",@"+1876",@"+81",@"+962",@"+7",@"+254",@"+686",@"+381",@"+965",@"+996",@"+856",@"+371",@"+961",@"+266",@"+231",@"+218",@"+423",@"+370",@"+352",@"+853",@"+389",@"+261",@"+265",@"+60",@"+960",@"+223",@"+356",@"+692",@"+222",@"+230",@"+262",@"+52",@"+691",@"+373",@"+377",@"+976",@"+382",@"+1664",@"+212",@"+258",@"+264",@"+674",@"+977",@"+31",@"+599",@"+687",@"+64",@"+505",@"+227",@"+234",@"+683",@"+672",@"+850",@"+1670",@"+47",@"+968",@"+92",@"+680",@"+507",@"+675",@"+595",@"+51",@"+63",@"+870",@"+48",@"+351",@"+1",@"+974",@"+242",@"+40",@"+7",@"+250",@"+590",@"+290",@"+1869",@"+1758",@"+1599",@"+508",@"+1784",@"+685",@"+378",@"+239",@"+966",@"+221",@"+381",@"+248",@"+232",@"+65",@"+421",@"+386",@"+677",@"+252",@"+27",@"+82",@"+34",@"+94",@"+249",@"+597",@"+268",@"+46",@"+41",@"+963",@"+886",@"+992",@"+255",@"+66",@"+670",@"+228",@"+690",@"+676",@"+1868",@"+216",@"+90",@"+993",@"+1649",@"+688",@"+256",@"+380",@"+971",@"+44",@"+1",@"+598",@"+1340",@"+998",@"+678",@"+58",@"+84",@"+681",@"970",@"+967",@"+260",@"+263", nil];
     }
-    
+    */
+        
+        NSString* path = [[NSBundle mainBundle] pathForResource:@"BDVCountryNameAndCode" ofType:@"plist"];
+        
+        BDVCountryNameAndCodePlist = [NSArray arrayWithContentsOfFile:path];
+        
+        countryNames = [[NSMutableArray alloc] init];
+        prefixDialingCodes = [[NSMutableArray alloc] init];
+        dictDialingCodes = [[NSMutableDictionary alloc] init];
+        
+        for (NSDictionary* obj in BDVCountryNameAndCodePlist) {
+            [countryNames addObject:[obj objectForKey:@"name"]];
+            [prefixDialingCodes addObject:[obj objectForKey:@"dial_code"]];
+            [dictDialingCodes setObject:[obj objectForKey:@"dial_code"] forKey:[obj objectForKey:@"code"]];
+        }
+        
+    }
     return self;
 }
 
 -(NSString *)prefixForCurrentLocale{
     NSString *countryLocale = [[[NSLocale currentLocale]
                               objectForKey:NSLocaleCountryCode] uppercaseString];
-    NSString *prefix = [self.dictDialingCodes objectForKey:countryLocale];
+    
+    NSString *prefix = [dictDialingCodes objectForKey:countryLocale];
     
     return prefix;
 }
 
 -(NSString *)countryNameForCurrentLocale{
-    NSInteger indexOfPrefixAtCountryNamesArray = [self.prefixDialingCodes indexOfObject:
+    NSInteger indexOfPrefixAtCountryNamesArray = [prefixDialingCodes indexOfObject:
                                                   [self prefixForCurrentLocale]];
-    NSString *countryName = [self.countryNames objectAtIndex:indexOfPrefixAtCountryNamesArray];
+    
+    NSString *countryName = [countryNames objectAtIndex:indexOfPrefixAtCountryNamesArray];
     
     return countryName;
 }
