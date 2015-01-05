@@ -19,7 +19,7 @@ BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init
 NSString *nameOfCurrentLocale = [BDVCountryNameAndCode countryNameForCurrentLocale]; // Returns "Canada"
 ```
 
-Get the image flat of current locale of user:
+Get the image flag of current locale of user:
 ```objective-c
 BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init];
 UIImage *flag = [BDVCountryNameAndCode countryLocaleImage]; // Returns UIImage*
