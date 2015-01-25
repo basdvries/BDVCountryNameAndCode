@@ -30,5 +30,4 @@ Easy but convenient
 TODO
 =====================
 - Create a CocoaPods
-
 - Add new languages for ```[BDVCountryNameAndCode countryNameForCurrentLocale]``` 
