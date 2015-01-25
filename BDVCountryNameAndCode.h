@@ -12,6 +12,6 @@
 
 -(NSString *)prefixForCurrentLocale;
 -(NSString *)countryNameForCurrentLocale;
--(UIImage *)countryLocaleImage;
+-(UIImage *)countryFlagForCurrentLocale;
 
 @end
