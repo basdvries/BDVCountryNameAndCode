@@ -296,7 +296,7 @@
     return self;
 }
 
--(NSString *)prefixForCurrentLocale{
+-(NSString *)prefixForCurrentLocale {
     NSString *countryLocale = [[[NSLocale currentLocale]
                               objectForKey:NSLocaleCountryCode] uppercaseString];
     
@@ -305,7 +305,7 @@
     return prefix;
 }
 
--(NSString *)countryNameForCurrentLocale{
+-(NSString *)countryNameForCurrentLocale {
     NSInteger indexOfPrefixAtCountryNamesArray = [prefixDialingCodes indexOfObject:
                                                   [self prefixForCurrentLocale]];
     
@@ -314,7 +314,7 @@
     return countryName;
 }
 
--(UIImage *)countryLocaleImage{
+-(UIImage *)countryFlagForCurrentLocale {
     
     NSString *imageName = [NSString stringWithFormat:@"%@.png",[[NSLocale currentLocale] displayNameForKey:NSLocaleCountryCode value:[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode]]];
     
