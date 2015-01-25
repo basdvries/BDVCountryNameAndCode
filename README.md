@@ -22,7 +22,7 @@ NSString *nameOfCurrentLocale = [BDVCountryNameAndCode countryNameForCurrentLoca
 Get the image flag of current locale of user:
 ```objective-c
 BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init];
-UIImage *flag = [BDVCountryNameAndCode countryLocaleImage]; // Returns UIImage*
+UIImage *flagOfCurrentLocale = [BDVCountryNameAndCode countryFlagForCurrentLocale]; // Returns UIImage
 ```
 
 Easy but convenient 
