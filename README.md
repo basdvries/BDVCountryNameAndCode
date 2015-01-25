@@ -30,4 +30,4 @@ Easy but convenient
 TODO
 =====================
 - Create a CocoaPods
-- Add new languages for ```objective-c [BDVCountryNameAndCode countryNameForCurrentLocale]``` 
+- Add new languages for ```[BDVCountryNameAndCode countryNameForCurrentLocale]``` 
