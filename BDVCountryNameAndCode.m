@@ -329,5 +329,8 @@
     return [UIImage new];
 }
 
+-(NSArray *)getCountrySuffixForPrefix:(NSString *)prefix{
+    return [dictDialingCodes allKeysForObject:prefix];
+}
 
 @end
