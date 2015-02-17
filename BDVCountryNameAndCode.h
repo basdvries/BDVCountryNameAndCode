@@ -14,4 +14,6 @@
 -(NSString *)countryNameForCurrentLocale;
 -(UIImage *)countryFlagForCurrentLocale;
 
+// returns possible region codes for provided prefix
+-(NSArray *)getCountrySuffixForPrefix:(NSString*)prefix;
 @end
