@@ -10,18 +10,18 @@ Add BDVCountryNameAndCode.h and BDVCountryNameAndCode.m to your project.
 
 Get prefix of current locale of user:
 ```objective-c
-BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init];
+BDVCountryNameAndCode *BDVCountryNameAndCode = [[BDVCountryNameAndCode alloc] init];
 NSString *prefixOfCurrentLocale = [BDVCountryNameAndCode prefixForCurrentLocale]; // Returns "+1" for Canada
 ```
 Get the name of the current country in the same way:
 ```objective-c
-BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init];
+BDVCountryNameAndCode *BDVCountryNameAndCode = [[BDVCountryNameAndCode alloc] init];
 NSString *nameOfCurrentLocale = [BDVCountryNameAndCode countryNameForCurrentLocale]; // Returns "Canada"
 ```
 
 Get the image flag of current locale of user:
 ```objective-c
-BDVCountryNameAndCode *BDVCountryNameAndCode [[BDVCountryNameAndCode alloc] init];
+BDVCountryNameAndCode *BDVCountryNameAndCode = [[BDVCountryNameAndCode alloc] init];
 UIImage *flagOfCurrentLocale = [BDVCountryNameAndCode countryFlagForCurrentLocale]; // Returns UIImage
 ```
 
