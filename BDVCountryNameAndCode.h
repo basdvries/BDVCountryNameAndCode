@@ -7,13 +7,30 @@
 //
 
 #import <Foundation/Foundation.h>
+#if __has_include(<UIKit/UIKit.h>)
+#import <UIKit/UIKit.h>
+#endif
 
-@interface BDVCountryNameAndCode : NSObject
+@interface BDVCountryNameAndCode : NSObject {
+    NSArray *BDVCountryNameAndCodePlist;
+    NSMutableDictionary *dictDialingCodes;
+    NSMutableArray *countryNames;
+    NSMutableArray *prefixDialingCodes;
+}
+
+-(instancetype)initWithPlistPath:(NSString *)plistPath;
 
 -(NSString *)prefixForCurrentLocale;
 -(NSString *)countryNameForCurrentLocale;
+#if __has_include(<UIKit/UIKit.h>)
 -(UIImage *)countryFlagForCurrentLocale;
+#endif
+
+-(NSString *)prefixForCountryCode:(NSString *)countryCode;
+-(NSString *)countryNameAtIndex:(NSUInteger)index;
+-(NSArray<NSString *> *)allCountryNames;
+-(NSArray<NSString *> *)allPrefixDialingCodes;
 
 // returns possible region codes for provided prefix
--(NSArray *)getCountrySuffixForPrefix:(NSString*)prefix;
+-(NSArray *)getCountrySuffixForPrefix:(id)prefix;
 @end

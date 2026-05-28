@@ -9,11 +9,28 @@
 #import "BDVCountryNameAndCode.h"
 
 
-@implementation BDVCountryNameAndCode{
-    NSArray *BDVCountryNameAndCodePlist;
-    NSMutableDictionary *dictDialingCodes;
-    NSMutableArray *countryNames;
-    NSMutableArray *prefixDialingCodes;
+@implementation BDVCountryNameAndCode
+
+-(void)loadPlistFromPath:(NSString *)path {
+    NSArray *plist = [NSArray arrayWithContentsOfFile:path];
+    if (!plist) return;
+    BDVCountryNameAndCodePlist = plist;
+    for (NSDictionary* obj in BDVCountryNameAndCodePlist) {
+        [countryNames addObject:[obj objectForKey:@"name"]];
+        [prefixDialingCodes addObject:[obj objectForKey:@"dial_code"]];
+        [dictDialingCodes setObject:[obj objectForKey:@"dial_code"] forKey:[obj objectForKey:@"code"]];
+    }
+}
+
+-(instancetype)initWithPlistPath:(NSString *)plistPath {
+    self = [super init];
+    if (self) {
+        countryNames = [[NSMutableArray alloc] init];
+        prefixDialingCodes = [[NSMutableArray alloc] init];
+        dictDialingCodes = [[NSMutableDictionary alloc] init];
+        [self loadPlistFromPath:plistPath];
+    }
+    return self;
 }
 
 -(id)init{
@@ -278,19 +295,12 @@
     }
     */
         
-        NSString* path = [[NSBundle mainBundle] pathForResource:@"BDVCountryNameAndCode" ofType:@"plist"];
-        
-        BDVCountryNameAndCodePlist = [NSArray arrayWithContentsOfFile:path];
-        
         countryNames = [[NSMutableArray alloc] init];
         prefixDialingCodes = [[NSMutableArray alloc] init];
         dictDialingCodes = [[NSMutableDictionary alloc] init];
         
-        for (NSDictionary* obj in BDVCountryNameAndCodePlist) {
-            [countryNames addObject:[obj objectForKey:@"name"]];
-            [prefixDialingCodes addObject:[obj objectForKey:@"dial_code"]];
-            [dictDialingCodes setObject:[obj objectForKey:@"dial_code"] forKey:[obj objectForKey:@"code"]];
-        }
+        NSString* path = [[NSBundle mainBundle] pathForResource:@"BDVCountryNameAndCode" ofType:@"plist"];
+        [self loadPlistFromPath:path];
         
     }
     return self;
@@ -314,6 +324,7 @@
     return countryName;
 }
 
+#if __has_include(<UIKit/UIKit.h>)
 -(UIImage *)countryFlagForCurrentLocale {
     
     NSString *imageName = [NSString stringWithFormat:@"%@.png",[[NSLocale currentLocale] displayNameForKey:NSLocaleCountryCode value:[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode]]];
@@ -328,8 +339,26 @@
     
     return [UIImage new];
 }
+#endif
 
--(NSArray *)getCountrySuffixForPrefix:(NSString *)prefix{
+-(NSString *)prefixForCountryCode:(NSString *)countryCode {
+    return [dictDialingCodes objectForKey:[countryCode uppercaseString]];
+}
+
+-(NSString *)countryNameAtIndex:(NSUInteger)index {
+    if (index >= [countryNames count]) return nil;
+    return [countryNames objectAtIndex:index];
+}
+
+-(NSArray<NSString *> *)allCountryNames {
+    return [countryNames copy];
+}
+
+-(NSArray<NSString *> *)allPrefixDialingCodes {
+    return [prefixDialingCodes copy];
+}
+
+-(NSArray *)getCountrySuffixForPrefix:(id)prefix{
     return [dictDialingCodes allKeysForObject:prefix];
 }
 
